@@ -1,48 +1,85 @@
-// Text Adventure Game
-const enter = "Please enter 1 or 2 for your answer";
 
-const gameOver = "Sorry GAME OVER!";
+let choiceTree = [];
 
-const start = `Welcome to the Ghostbusters Text Adventure Game. Click 'OK' to start the game.`;
 
-const q1 = `You are trying to catch a ghost called "Slimer" at the Sedgwick Hotel but have not seen him yet. Should you...
-1. Take the elevator to look on the 12th floor
-OR
-2. Wait in the lobby to see if he shows up there
-${enter}`;
+function choiceOption(message, opt1, opt2, correctOpt, corPrompt, wrongPrompt) {
+    let fullOption = {
+        m: message,
+        c1: opt1,
+        c2: opt2,
+        ra: correctOpt,
+        rp: corPrompt,
+        wp: wrongPrompt,
+    }
+    choiceTree.push(fullOption)
+}
+function OptionADD(option) {
+    choiceOption(option[0], option[1], option[2], option[3], option[4], option[5]);
+}
 
-const gameOver1 = `You never see Slimer so you give up on catching ghosts and become a talk show host instead. ${gameOver}`;
+function DisplayIt(optNum) {
+    let displayPrompt = choiceTree[optNum].m + "\n What will you do?\n"+ "\n 1. " + choiceTree[optNum].c1 + "\n 2. " + choiceTree[optNum].c2;
+    let userInput = prompt(displayPrompt);
+    if (userInput == choiceTree[optNum].ra) {
+        alert(choiceTree[optNum].rp);
+        if (optNum == totalOptions - 1) {
+            if (confirm("Good Job! This system is now free of pirates. Do you want to Play Again?")) {
+            DisplayIt(0);
+            }
+        } else {
+            DisplayIt(optNum + 1);
+        }
+    } else {
+        alert("GAME OVER - You Lose" + "\n\n " + choiceTree[optNum].wp);
+        if (confirm("Play Again?")) {
+            DisplayIt(0);
+        }
+    }
+}
 
-const q2 = `When you get off the elevator something startles you! Should you...
-1. Look to see what it is
-OR
-2. Shoot at it immediately with your proton pack
-${enter}`;
+const totalOptions = 5;
 
-const gameOver2 = `It was the hotel maid and you nearly killed her! You are forced to leave the hotel. ${gameOver}`;
+const message1 = "You have intel that pirates are targeting a mining operation in the system.\n You have just arrived at the first astroid belt, no hostiles are detected.";
+const choice1a = "Warp to the next astroid belt";
+const choice1b = "Stay here and see if anyone shows up";
+const correct1 = 1;
+const correctPrompt1 = "Warp Drive Engaged.... prepare for anything";
+const wrongPrompt1 = "The pirates hit a mining ship in one of the other belts! They win this time...";
+const Option1 = [message1, choice1a, choice1b, correct1, correctPrompt1, wrongPrompt1];
+OptionADD(Option1);
 
-const q3 = `It was just the hotel maid. So you walk around to look for Slimer and You Spot Him! Should you...
-1. Call to let the other Ghostbusters know you found him
-OR
-2. Hide and wait to see where he goes
-${enter}`;
+const message2 = "A Neutral Faction is training new frigate pilots here";
+const choice2a = "New Pilots? More like easy targets. Open Fire!";
+const choice2b = "Continue to next belt.";
+const correct2 = 2;
+const correctPrompt2 = "Warp Drive Engaged.... prepare for anything";
+const wrongPrompt2 = "You lock target and fire upon neutral ships. Your rapdid fire missiles make quick work of the inexperienced frigates. \n You nearly sparked a galactic war. You have been dishonorably discharged and locked in a cell, you monster...";
+const Option2 = [message2, choice2a, choice2b, correct2, correctPrompt2, wrongPrompt2];
+OptionADD(Option2);
 
-const gameOver3 = `Slimer hears you, immediately flies at you, and YOU GET SLIMED! ${gameOver}`;
+const message3 = "You spot an enemy pirate in a Machariel class battleship. They immediately begin to target lock you";
+const choice3a = "Fly directly at them to get in weapons range.";
+const choice3b = "Approach slowly, using asteroids for cover.";
+const correct3 = 2;
+const correctPrompt3 = "They fire upon you once fully locked. Your movement allowed your ship to dodge the incoming artilery shots.";
+const wrongPrompt3 = "They immediatly fired artilery shots at you when you began the approach. Your ship has been destroyed and the lives of your crew forfiet. That wasn't very tactical...";
+const Option3 = [message3, choice3a, choice3b, correct3, correctPrompt3, wrongPrompt3];
+OptionADD(Option3);
 
-const q4 = `You see that Slimer goes into the ballroom so you quickly tell the other Ghostbusters and you all head in. You see him flying around when you walk in. Should you...
-1. Shoot at him with your proton pack
-OR
-2. Put two proton packs together to try and create a more powerful shot (A.K.A. Cross The Streams)
-${enter}`;
+const message4 = "You have made it in to weapons range";
+const choice4a = "Overload weapons, divert all power to Neutron Blasters";
+const choice4b = "Activate Warp Scrambler and call for reinforcements";
+const correct4 = 2;
+const correctPrompt4 = "You transmit coordinates to the fleet. Reinforcements should arrive soon...";
+const wrongPrompt4 = "The battleship launches attack drones, your overloaded weapons have drained the capacitor and left you vulnerable...";
+const Option4 = [message4, choice4a, choice4b, correct4, correctPrompt4, wrongPrompt4];
+OptionADD(Option4);
 
-const gameOver4 = `All life as you know it stops instantaneously and every molecule in your body explodes at the speed of light. ${gameOver}`;
-
-const q5 = `You wrangled Slimer with your shot and the ghost trap is set underneath him. You noticed there is a bright light coming from the trap and are tempted to look at it. Should you...
-1. Look at the trap
-OR
-2. Keep your focus on Slimer
-${enter}`;
-
-const gameOver5 = `You looked at the trap and the light BLINDED YOU! ${gameOver}`;
-
-const win = `The ghost trap sucked Slimer in and closed. CONGRATULATIONS! YOU CAUGHT SLIMER!!!`;
+const message5 = "The pirate hails you on coms and offers a considerable amount of cash if you let them go...";
+const choice5a = "Take the money.";
+const choice5b = "Keep them held down.";
+const correct5 = 2;
+const correctPrompt5 = "Your fleet arrives and quickly dispatches the target. Well done, crisis averted!";
+const wrongPrompt5 = "You tell the fleet the pirate jammed you and got away. You head straight to the casino once you make it back to port. You lose it all on a bad bet, damn.";
+const Option5 = [message5, choice5a, choice5b, correct5, correctPrompt5, wrongPrompt5];
+OptionADD(Option5);
