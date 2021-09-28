@@ -1,43 +1,5 @@
-
-let choiceTree = [];
-
-
-function choiceOption(message, opt1, opt2, correctOpt, corPrompt, wrongPrompt) {
-    let fullOption = {
-        m: message,
-        c1: opt1,
-        c2: opt2,
-        ra: correctOpt,
-        rp: corPrompt,
-        wp: wrongPrompt,
-    }
-    choiceTree.push(fullOption)
-}
-function OptionADD(option) {
-    choiceOption(option[0], option[1], option[2], option[3], option[4], option[5]);
-}
-
-function DisplayIt(optNum) {
-    let displayPrompt = choiceTree[optNum].m + "\n What will you do?\n"+ "\n 1. " + choiceTree[optNum].c1 + "\n 2. " + choiceTree[optNum].c2;
-    let userInput = prompt(displayPrompt);
-    if (userInput == choiceTree[optNum].ra) {
-        alert(choiceTree[optNum].rp);
-        if (optNum == totalOptions - 1) {
-            if (confirm("Good Job! This system is now free of pirates. Do you want to Play Again?")) {
-            DisplayIt(0);
-            }
-        } else {
-            DisplayIt(optNum + 1);
-        }
-    } else {
-        alert("GAME OVER - You Lose" + "\n\n " + choiceTree[optNum].wp);
-        if (confirm("Play Again?")) {
-            DisplayIt(0);
-        }
-    }
-}
-
 const totalOptions = 5;
+let choiceTree = [];
 
 const message1 = "You have intel that pirates are targeting a mining operation in the system.\n You have just arrived at the first astroid belt, no hostiles are detected.";
 const choice1a = "Warp to the next astroid belt";
@@ -83,3 +45,38 @@ const correctPrompt5 = "Your fleet arrives and quickly dispatches the target. We
 const wrongPrompt5 = "You tell the fleet the pirate jammed you and got away. You head straight to the casino once you make it back to port. You lose it all on a bad bet, damn.";
 const Option5 = [message5, choice5a, choice5b, correct5, correctPrompt5, wrongPrompt5];
 OptionADD(Option5);
+
+function choiceOption(message, opt1, opt2, correctOpt, corPrompt, wrongPrompt) {
+    let fullOption = {
+        m: message,
+        c1: opt1,
+        c2: opt2,
+        ra: correctOpt,
+        rp: corPrompt,
+        wp: wrongPrompt,
+    }
+    choiceTree.push(fullOption)
+}
+function OptionADD(option) {
+    choiceOption(option[0], option[1], option[2], option[3], option[4], option[5]);
+}
+
+function DisplayIt(optNum) {
+    let displayPrompt = choiceTree[optNum].m + "\n What will you do?\n"+ "\n 1. " + choiceTree[optNum].c1 + "\n 2. " + choiceTree[optNum].c2;
+    let userInput = prompt(displayPrompt);
+    if (userInput == choiceTree[optNum].ra) {
+        alert(choiceTree[optNum].rp);
+        if (optNum == totalOptions - 1) {
+            if (confirm("Good Job! This system is now free of pirates. Do you want to Play Again?")) {
+            DisplayIt(0);
+            }
+        } else {
+            DisplayIt(optNum + 1);
+        }
+    } else {
+        alert("GAME OVER - You Lose" + "\n\n " + choiceTree[optNum].wp);
+        if (confirm("Play Again?")) {
+            DisplayIt(0);
+        }
+    }
+}
